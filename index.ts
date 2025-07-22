@@ -26,14 +26,20 @@ program
     "Comma-separated list of attribute names",
     "title,alt,placeholder"
   )
+  .option(
+    "-t, --truncate <limit>",
+    "Truncate text to this length, 0 to disable",
+    "30"
+  )
   .parse();
 
-const dir = program.args[0] as string;
+const dir = path.resolve(program.args[0] as string);
 const options = program.opts();
 const extensions = options.ext.split(",").map((ext: string) => ext.trim());
 const attributes = options.attributes
   .split(",")
   .map((attr: string) => attr.trim());
+const truncate = options.truncate ? parseInt(options.truncate) : 0;
 
 function extractTextWithLocation(filePath: string, code: string) {
   const ast = babelParser.parse(code, {
@@ -71,7 +77,14 @@ function extractTextWithLocation(filePath: string, code: string) {
   });
 
   results.forEach(({ line, text }) => {
-    console.log(`[${path.relative(process.cwd(), filePath)}:${line}] ${text}`);
+    const truncatedText = truncate
+      ? text.length > truncate
+        ? text.substring(0, truncate) + "..."
+        : text
+      : text;
+    console.log(
+      `[${path.relative(process.cwd(), filePath)}:${line}] ${truncatedText}`
+    );
   });
 }
 
@@ -92,4 +105,4 @@ function scanDir(dirPath: string) {
   }
 }
 
-scanDir(path.resolve(dir));
+scanDir(dir);
