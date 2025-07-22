@@ -37,14 +37,17 @@ npm install -g .
 ### Basic Usage
 
 ```bash
-# Run from source (development)
-npm run dev <directory>
-
-# Run built version
-npm start <directory>
+# Use with npx (recommended)
+npx i18n-scan <directory>
 
 # If installed globally
 i18n-scan <directory>
+
+# Run locally during development
+npm run dev <directory>
+
+# Run built version locally
+npm start <directory>
 ```
 
 ### Examples
@@ -95,3 +98,7 @@ npm run dev ./src --attributes title,alt,placeholder,aria-label
    <img alt="Profile picture" />          // Extracts: "Profile picture"
    <button title="Close dialog" />        // Extracts: "Close dialog"
    ```
+
+## Github Repo
+
+https://github.com/hexxt-git/i18n-scan
