@@ -1,6 +1,6 @@
 {
   "name": "i18n-scan",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Extract raw text from JSX for i18n",
   "main": "dist/index.js",
   "type": "module",
