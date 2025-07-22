@@ -15,7 +15,7 @@ const program = new Command();
 program
   .name("extract-i18n")
   .description("Extract raw text from JSX for i18n")
-  .argument("<directory>", "Directory to scan")
+  .argument("[directory]", "Directory to scan", ".")
   .option(
     "-e, --ext <extensions>",
     "Comma-separated list of file extensions",
