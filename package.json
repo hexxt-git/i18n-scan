@@ -7,6 +7,10 @@
   "bin": {
     "i18n-scan": "./dist/index.js"
   },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx index.ts",

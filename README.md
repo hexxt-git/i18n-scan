@@ -1,6 +1,7 @@
 # i18n-scan
 
 A CLI tool to extract raw text from JSX/TSX files for internationalization (i18n).
+
 Best paired with agentic ai tools like Cursor.
 
 ## Features
