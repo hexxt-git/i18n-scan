@@ -61,12 +61,17 @@ npm run dev ./src --ext .tsx,.jsx,.ts,.js
 
 # Scan with custom attributes
 npm run dev ./src --attributes title,alt,placeholder,aria-label
+
+# Include node_modules directory (excluded by default)
+npm run dev ./src --deps
 ```
 
 ### Options
 
 - `-e, --ext <extensions>`: Comma-separated list of file extensions (default: `.tsx,.jsx`)
 - `-a, --attributes <names>`: Comma-separated list of attribute names to extract (default: `title,alt,placeholder`)
+- `-t, --truncate <limit>`: Truncate text to this length, 0 to disable (default: `30`)
+- `-d, --deps`: Include dependency directories (node_modules). By default, node_modules is excluded.
 
 ## Example Output
 
