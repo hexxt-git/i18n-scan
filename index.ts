@@ -41,9 +41,10 @@ program
     "Include string literals from objects, function calls, and schemas",
     false
   )
+  .option("-d, --deps", "Include dependency directories (node_modules)")
   .parse();
 
-const dir = path.resolve(program.args[0] as string);
+const dir = path.resolve(program.args?.at(0) ?? ".");
 const options = program.opts();
 const extensions = options.ext.split(",").map((ext: string) => ext.trim());
 const attributes = options.attributes
@@ -336,6 +337,9 @@ function scanDir(dirPath: string) {
   for (const entry of entries) {
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
+      if (!options.deps && entry.name === "node_modules") {
+        continue;
+      }
       scanDir(fullPath);
     } else if (
       entry.isFile() &&

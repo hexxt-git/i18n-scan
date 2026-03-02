@@ -71,6 +71,9 @@ npm run dev ./src -- --include-literals
 # Combine options
 npm run dev ./src -- --filter-non-alpha --truncate 50
 
+# Include node_modules directory (excluded by default)
+npm run dev ./src -- --deps
+
 # When using npx or installed globally, no -- needed:
 npx i18n-scan ./src --filter-non-alpha --truncate 50
 ```
@@ -82,6 +85,7 @@ npx i18n-scan ./src --filter-non-alpha --truncate 50
 - `-t, --truncate <limit>`: Truncate text to this length, 0 to disable (default: `30`)
 - `-f, --filter-non-alpha`: Filter out text containing only non-alphabetic characters (e.g., `$`, `123`, `🎉`)
 - `-l, --include-literals`: Include string literals from objects, function calls, and validation schemas
+- `-d, --deps`: Include dependency directories (node_modules). By default, node_modules is excluded.
 
 ## Example Output
 
