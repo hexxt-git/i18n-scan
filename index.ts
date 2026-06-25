@@ -42,6 +42,11 @@ program
     false
   )
   .option("-d, --deps", "Include dependency directories (node_modules)")
+  .option(
+    "-c, --count",
+    "Return a single integer count of all matches rather than logging them",
+    false
+  )
   .parse();
 
 const dir = path.resolve(program.args?.at(0) ?? ".");
@@ -53,6 +58,9 @@ const attributes = options.attributes
 const truncate = options.truncate ? parseInt(options.truncate) : 0;
 const filterNonAlpha = options.filterNonAlpha || false;
 const includeLiterals = options.includeLiterals || false;
+const count = options.count || false;
+
+let totalCount = 0;
 
 // Keys that typically contain user-facing text
 const USER_FACING_KEYS = new Set([
@@ -319,16 +327,20 @@ function extractTextWithLocation(filePath: string, code: string) {
     });
   }
 
-  results.forEach(({ line, text }) => {
-    const truncatedText = truncate
-      ? text.length > truncate
-        ? text.substring(0, truncate) + "..."
-        : text
-      : text;
-    console.log(
-      `[${path.relative(process.cwd(), filePath)}:${line}] ${truncatedText}`
-    );
-  });
+  if (count) {
+    totalCount += results.length;
+  } else {
+    results.forEach(({ line, text }) => {
+      const truncatedText = truncate
+        ? text.length > truncate
+          ? text.substring(0, truncate) + "..."
+          : text
+        : text;
+      console.log(
+        `[${path.relative(process.cwd(), filePath)}:${line}] ${truncatedText}`
+      );
+    });
+  }
 }
 
 function scanDir(dirPath: string) {
@@ -352,3 +364,7 @@ function scanDir(dirPath: string) {
 }
 
 scanDir(dir);
+
+if (count) {
+  console.log(totalCount);
+}

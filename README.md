@@ -11,6 +11,7 @@ Best paired with agentic ai tools like Cursor.
 - Supports TypeScript and JavaScript JSX files
 - Configurable file extensions and attribute names
 - Shows file path and line numbers for each extracted text
+- Supports returning a single integer count of all matched texts instead of listing them
 
 ## Installation
 
@@ -74,6 +75,9 @@ npm run dev ./src -- --filter-non-alpha --truncate 50
 # Include node_modules directory (excluded by default)
 npm run dev ./src -- --deps
 
+# Return a single integer count of all matches rather than logging them
+npx i18n-scan ./src --count
+
 # When using npx or installed globally, no -- needed:
 npx i18n-scan ./src --filter-non-alpha --truncate 50
 ```
@@ -86,6 +90,7 @@ npx i18n-scan ./src --filter-non-alpha --truncate 50
 - `-f, --filter-non-alpha`: Filter out text containing only non-alphabetic characters (e.g., `$`, `123`, `🎉`)
 - `-l, --include-literals`: Include string literals from objects, function calls, and validation schemas
 - `-d, --deps`: Include dependency directories (node_modules). By default, node_modules is excluded.
+- `-c, --count`: Return a single integer count of all matches rather than logging them (default: `false`)
 
 ## Example Output
 
